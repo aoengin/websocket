@@ -5,16 +5,27 @@ from autobahn.asyncio.websocket import WebSocketClientProtocol, \
 
 import time
 import sys
-counter = 0
-num_clients = 16
-start_time = 0
-is_open = False
+import random
+import sys
 
+counter = 0
+num_clients = 1
+clients = 0
+start_time = 0
+param1 = 0
+is_open = False
+in_write = False
 def log_and_exit():
-    print(counter)
-    print(time.time())
-    print(start_time)
-    sys.exit(0)
+    global in_write 
+    if not in_write:
+        in_write = True
+        print("in")
+        file1 = open("results/autobahn_autobahn_multiple_console_1.txt", "a")
+        file1.write(str(counter) + "\n")
+        file1.write(str(time.time()) + "\n")
+        file1.write(str(start_time) + "\n")
+        file1.close()
+        sys.exit(0)
 
 class MyClientProtocol(WebSocketClientProtocol):
 
@@ -27,18 +38,26 @@ class MyClientProtocol(WebSocketClientProtocol):
 
     def onOpen(self):
         global start_time
+        global clients
+        global counter
         start_time = time.time()
+        clients += 1
+        if clients == num_clients:
+            counter = 0
+            start_time = time.time()
         global is_open
         is_open = True
         print("WebSocket connection open.")
         
         
 
-    def onMessage(self, payload, isBinary):
+    async def onMessage(self, payload, isBinary):
         global counter        
         counter += 1
         global start_time
-        if is_open and time.time() - start_time > 20:
+        global param1
+        if time.time() - start_time > 20 and is_open and not in_write:
+            await asyncio.sleep(param1)
             log_and_exit()
 
     def onClose(self, wasClean, code, reason):
@@ -57,5 +76,6 @@ if __name__ == '__main__':
     
     for m in range(num_clients):
         loop.run_until_complete(coros[m])
+    param1 = float(sys.argv[1])
     loop.run_forever()
     loop.close()

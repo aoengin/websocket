@@ -3,14 +3,18 @@ from autobahn.twisted.websocket import WebSocketServerFactory, \
     WebSocketServerProtocol, \
     listenWS
 import time
+import sys
 
 from twisted.internet import reactor
 
-
+counter = 0
+start_time = time.time()
 class BroadcastServerProtocol(WebSocketServerProtocol):
 
     def onOpen(self):
+        global start_time
         self.factory.register(self)
+        start_time = time.time()
 
     def onMessage(self, payload, isBinary):
         if not isBinary:
@@ -43,16 +47,23 @@ class BroadcastServerFactory(WebSocketServerFactory):
     def register(self, client):
         if client not in self.clients:
             print("registered client {}".format(client.peer))
+            counter = 0
             self.clients.append(client)
 
     def unregister(self, client):
         if client in self.clients:
             print("unregistered client {}".format(client.peer))
             self.clients.remove(client)
+            print(counter)
 
     def broadcast(self, msg):
+        global counter
+        global start_time
+        if time.time() - start_time > 30:
+            reactor.stop()
         for c in self.clients:
             try:
+                counter += 1
                 c.sendMessage(msg.encode('utf8'))
             except:
                 print("Connection lost.")

@@ -4,24 +4,31 @@ import rel
 import time
 import sys
 
-num_of_messages = 32
 counter = 0
-
-num_clients = 16
+num_clients = 1
 start_time = 0
 is_open = False
 active_clients = 0
+is_auto = True
+in_write = False
+
 def log_and_exit():
-    print(counter)
-    print(time.time())
-    print(start_time)
-    sys.exit(0)
+    global in_write 
+    if not in_write:
+        in_write = True
+        print("in")
+        file1 = open("socketify_websocket_1.txt", "a")
+        file1.write(str(counter) + "\n")
+        file1.write(str(time.time()) + "\n")
+        file1.write(str(start_time) + "\n")
+        file1.close()
+        sys.exit(0)
 
 def on_message(ws, message):
     global counter
     counter += 1
     global start_time
-    if is_open and time.time() - start_time > 20:
+    if is_open and time.time() - start_time > 20 and not in_write:
         log_and_exit()
 
 
@@ -32,6 +39,7 @@ def on_open(ws):
     global counter
     active_clients+=1
     if active_clients == num_clients:
+        print("starting the benchmark")
         start_time = time.time()
         counter = 0
     global is_open
@@ -48,7 +56,3 @@ if __name__ == "__main__":
         ws.run_forever(dispatcher=rel, reconnect=5) 
     rel.signal(2, rel.abort)
     rel.dispatch()
-
-
-    
-    
