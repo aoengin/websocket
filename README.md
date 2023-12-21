@@ -110,7 +110,7 @@ Though the connection time is pretty short when it connects to the Socketify, it
 
 In terms of throughput, Socketify performs approximately 3 times better than the Autobahn. Since the autobahn-python is a pure python implementation, the difference in the performance is understandable.
 
-The connection time of the clients to the servers is not reported explicitly, but the connection times are similar.
+The connection times of clients to the servers are not reported explicitly, but they are similar, except when the 'websocket-client' and 'autobahn' server are run together.  
 
 In terms of scalability, both servers are performing worse as the number of clients is increased. The total number of packages that a server can send is stated above and since they cannot exceed this limit, the number of packages sent to a client decreases as the number of clients increases. So to use the clients with the maximum performance, the number of clients connected to the a server should be kept at a minimum. (For Autobahn client, Socketify can handle 3 clients and Autobahn can handle 1 client according to test results if we want to run the clients with the maximum performance)
 
