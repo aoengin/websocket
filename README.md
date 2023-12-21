@@ -62,12 +62,12 @@ Socketify server implementation is constructed on uWebSocket, a networking libra
 
 M indicates multiple processes for different clients. The test script is used in those test cases.
 
-The first two results are not included in the average calculation since the limiting factor is the client side in that case.
+The tests with 1 and 2 clients are not included in the average calculation since the limiting factor is the client side in that case.
 
 The test indicates the following results:
 The average number of packets that a Socketify server can send is 73195 per second (1463913 packets in approximately 20 secs).
 
-The server is capable of handling successful connections up to 16 clients. Most probably more clients are also possible, but the number of packages that are sent by the server to each client is decreasing with the increasing number of clients. Therefore, though the connection is successful, the performance is decreasing linearly with the increasing number of clients, just like the Autobahn Server.
+The server is capable of handling successful connections up to 16 clients. Most probably more clients are also possible, but the number of packages that are sent by the server to each client is decreasing with the increasing number of clients. Therefore, though the connection is successful, the performance is decreasing with the increasing number of clients, just like the Autobahn Server.
 
 Actually, the number of packages sent by the server is quite higher, but since some packages are dropped, most probably because of buffering issues, I only reported the number of packages successfully transmitted to the client side. The dropping rate is pretty high compared to the Autobahn websocket server.
 
