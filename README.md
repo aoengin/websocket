@@ -1,6 +1,4 @@
-# Markdown syntax guide
-
-## Benchmarking
+# Benchmarking
 The aim of this project is to conduct benchmarking to assess the performance of different websocket libraries. Different techniques are used for different cases throughout the benchmarking process.
 
 ## Test Environment
