@@ -5,7 +5,7 @@ import time
 import sys
 
 counter = 0
-num_clients = 1
+num_clients = 4
 start_time = 0
 is_open = False
 active_clients = 0

@@ -45,6 +45,7 @@ class BroadcastServerFactory(WebSocketServerFactory):
         reactor.callLater(0, self.tick)
 
     def register(self, client):
+        global counter
         if client not in self.clients:
             print("registered client {}".format(client.peer))
             counter = 0

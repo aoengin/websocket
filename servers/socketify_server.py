@@ -39,7 +39,7 @@ successful_counter = 0
 counter = 0
 first_connection = False
 clients = 0
-num_of_clients = 1
+num_of_clients = 4
 start_time = time.time()
 async def start_streaming_data():   
     global counter

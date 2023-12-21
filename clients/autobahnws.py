@@ -9,7 +9,7 @@ import random
 import sys
 
 counter = 0
-num_clients = 1
+num_clients = 2
 clients = 0
 start_time = 0
 param1 = 0
@@ -20,7 +20,7 @@ def log_and_exit():
     if not in_write:
         in_write = True
         print("in")
-        file1 = open("results/autobahn_autobahn_multiple_console_1.txt", "a")
+        file1 = open("results/socketify_autows_multiple_console_2.txt", "a")
         file1.write(str(counter) + "\n")
         file1.write(str(time.time()) + "\n")
         file1.write(str(start_time) + "\n")
