@@ -35,22 +35,18 @@ class Periodic:
             await self.func()
 
 app = App()
-successful_counter = 0
 counter = 0
 first_connection = False
 clients = 0
-num_of_clients = 4
+num_of_clients = 16
 start_time = time.time()
 async def start_streaming_data():   
     global counter
-    # global successful_counter
     data = "Continuous data stream: " + str(time.time())
     status = app.publish("stream", data, OpCode.TEXT)
     counter += 1
     if time.time() - start_time > 30:
         sys.exit(0)
-    # if status:
-    #     successful_counter += 1
 
 
 p = Periodic(start_streaming_data, 0.000001)

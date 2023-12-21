@@ -10,6 +10,12 @@ async def main():
         ["python", "servers/socketify_server.py"],
         ["python", "clients/autobahnws.py", "0"],
         ["python", "clients/autobahnws.py", "0.05"],
+        ["python", "clients/autobahnws.py", "0.1"],
+        ["python", "clients/autobahnws.py", "0.15"],
+        ["python", "clients/autobahnws.py", "0.2"],
+        ["python", "clients/autobahnws.py", "0.25"],
+        ["python", "clients/autobahnws.py", "0.3"],
+        ["python", "clients/autobahnws.py", "0.35"],
     ]
 
     tasks = [run_subprocess(command) for command in commands]

@@ -41,7 +41,7 @@ M indicates multiple processes for different clients. The test script is used in
 The test indicates the following results:
 The average number of packets that an Autobahn server can send is 25224 per second (504482 packets in approximately 20 secs).
 
-The server is capable of handling successful connections up to 16 clients. Most probably more clients are also possible, but the number of packages that are sent by the server is decreasing with the increasing number of clients. Therefore, though the connection is successful, the performance is decreasing linearly with the increasing number of clients.
+The server is capable of handling successful connections up to 16 clients. Most probably more clients are also possible, but the number of packages that are sent by the server to each client is decreasing with the increasing number of clients. Therefore, though the connection is successful, the performance is decreasing with the increasing number of clients.
 
 Actually, the number of packages sent by the server is higher, but since some packages are dropped most probably because of buffering issues, I only reported the number of packages successfully transmitted.
 
@@ -53,10 +53,12 @@ Socketify server implementation is constructed on uWebSocket, a networking libra
 
 | Client Library | Number of Clients | Total number of packages received (20 secs) |
 | -------------- | ----------------- | ------------------------------------------- |
-| Socketify      | 1                 | 414574                                      |
-| Socketify      | 2(M)              | 751007                                      |
-| Socketify      | 4(M)              | 1281229                                     |
-| Socketify      | 6(M)              | 1640598                                     |
+| Autobahn       | 1                 | 414574                                      |
+| Autobahn       | 8                 | 388788                                      |
+| Autobahn       | 16                | 382694                                      |
+| Autobahn       | 2(M)              | 751007                                      |
+| Autobahn       | 4(M)              | 1281229                                     |
+| Autobahn       | 6(M)              | 1640598                                     |
 
 M indicates multiple processes for different clients. The test script is used in those test cases.
 
@@ -65,9 +67,11 @@ The first two results are not included in the average calculation since the limi
 The test indicates the following results:
 The average number of packets that a Socketify server can send is 73195 per second (1463913 packets in approximately 20 secs).
 
-The server is capable of handling successful connections up to 16 clients. Most probably more clients are also possible, but the number of packages that are sent by the server is decreasing with the increasing number of clients. Therefore, though the connection is successful, the performance is decreasing linearly with the increasing number of clients, just like the Autobahn Server.
+The server is capable of handling successful connections up to 16 clients. Most probably more clients are also possible, but the number of packages that are sent by the server to each client is decreasing with the increasing number of clients. Therefore, though the connection is successful, the performance is decreasing linearly with the increasing number of clients, just like the Autobahn Server.
 
 Actually, the number of packages sent by the server is quite higher, but since some packages are dropped, most probably because of buffering issues, I only reported the number of packages successfully transmitted to the client side. The dropping rate is pretty high compared to the Autobahn websocket server.
+
+The results obtained using 8 and 16 clients in an asynchronous manner are ignored, as they do not yield reasonable and expected results. I have decided to employ multiple processes for each client instead. My hypothesis regarding what occurs is that, since the library is written in C++, when asynchronous tasks are utilized, the advantages of the library are not fully realized, and task switching limits its performance. However, this is merely a conjecture, and further testing and evaluation are required.
 
 ## Autobahn Client
 
