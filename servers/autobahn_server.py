@@ -3,7 +3,6 @@ from autobahn.twisted.websocket import WebSocketServerFactory, \
     WebSocketServerProtocol, \
     listenWS
 import time
-import sys
 
 from twisted.internet import reactor
 
@@ -72,7 +71,6 @@ class BroadcastServerFactory(WebSocketServerFactory):
 if __name__ == '__main__':
 
     ServerFactory = BroadcastServerFactory
-    # ServerFactory = BroadcastPreparedServerFactory
 
     factory = ServerFactory("ws://127.0.0.1:8000")
     factory.protocol = BroadcastServerProtocol

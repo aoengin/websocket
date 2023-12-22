@@ -21,6 +21,7 @@ async def main():
     tasks = [run_subprocess(command) for command in commands]
     results = await asyncio.gather(*tasks)
 
+    # #Print Result
     # for i, (stdout, stderr) in enumerate(results):
     #     print(f"Result for subprocess {i + 1}:")
     #     print(f"stdout:\n{stdout}")

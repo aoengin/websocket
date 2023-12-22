@@ -9,7 +9,6 @@ num_clients = 4
 start_time = 0
 is_open = False
 active_clients = 0
-is_auto = True
 in_write = False
 
 def log_and_exit():
