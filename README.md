@@ -69,7 +69,7 @@ The average number of packets that a Socketify server can send is 73195 per seco
 
 The server is capable of handling successful connections up to 16 clients. Most probably more clients are also possible, but the number of packages that are sent by the server to each client is decreasing with the increasing number of clients. Therefore, though the connection is successful, the performance is decreasing with the increasing number of clients, just like the Autobahn Server.
 
-Actually, the number of packages sent by the server is quite higher, but since some packages are dropped, most probably because of buffering issues, I only reported the number of packages successfully transmitted to the client side. The dropping rate is pretty high compared to the Autobahn websocket server.
+Actually, the number of packages sent by the server is quite higher, but since some packages are dropped, most probably because of buffering issues, I only reported the number of packages successfully transmitted to the client side. The drop rate is high compared to the Autobahn websocket server.
 
 The results obtained using 8 and 16 clients in an asynchronous manner are ignored, as they do not yield reasonable and expected results. I have decided to employ multiple processes for each client instead. My hypothesis regarding what occurs is that, since the library is written in C++, when asynchronous tasks are utilized, the advantages of the library are not fully realized, and task switching limits its performance. However, this is merely a conjecture, and further testing and evaluation are required.
 
