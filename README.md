@@ -90,6 +90,8 @@ Autobahn client implementation used is constructed using Asyncio and Twisted in 
 | Autobahn       | 4(M)              | 133198                                            |
 | Autobahn       | 6(M)              | 69222                                             |
 
+M indicates multiple processes for different clients. The test script is used in those test cases.
+
 Only the first two results for Socketify server and the first result for Autobahn server give a valid idea about the performance of the client. The limiting factor at the other results is the server side. Therefore, we can indicate that the number of packets received by the client is 20078 on average (401577 in 20 secs).
 
 ## Websocket Client
