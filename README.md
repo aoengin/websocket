@@ -96,7 +96,7 @@ Only the first two results for Socketify server and the first result for Autobah
 
 ## Websocket Client
 
-Autobahn client implementation is written in Python. The simple example from the original repository of the library is used for implementing a basic client. The client is further developed for logging the results and asynchronously running multiple clients to test the scalability of the servers.
+Websocket client implementation is written in Python. The simple example from the original repository of the library is used for implementing a basic client. The client is further developed for logging the results and asynchronously running multiple clients to test the scalability of the servers.
 
 ### Test Results
 | Server Library | Number of Clients | Number of packages received per client (20 secs) |
